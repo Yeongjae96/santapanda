@@ -4,6 +4,8 @@
       :headers="dataTable.headers"
       :items="dataTable.data"
       :items-per-page="5"
+      loading
+       loading-text="Loading... Please wait"
       class="elevation-1"
       @click:row="rowClick"
     >
@@ -16,7 +18,6 @@
   </v-container>
 </template>
 <script>
-import axios from 'axios';
 export default {
   name: 'BoardList',
   data() {
@@ -51,23 +52,19 @@ export default {
   mounted() {},
   methods: {
     fetch() {
-      console.log('fetch list');
-      axios
-        .get('http://localhost:8000/api/board')
-        .then(response => {
-          if (response.data && response.data.length) {
-            this.dataTable.data = response.data;
-          }
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      this.$http.url='/board';
+      this.$http.method='get';
+      this.$http.request(response => {
+        if (response.data && response.data.length) {
+          this.dataTable.data = response.data;
+        }
+      }, error => window.alert(error));
     },
     writeClick() {
       this.$router.push('/writer');
     },
     rowClick(item) {
-      this.$router.push('/view/' + item.seq);
+      this.$router.push('/view/' + item.boardNo);
     },
   },
 };

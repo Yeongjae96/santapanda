@@ -12,8 +12,8 @@ public class BoardVO {
 	private String content;
 	private String createUserId;
 	private String createUserNm;
-	private Timestamp createDt;
+	private String createDt;
 	private String updateUserId;
 	private String updateUserNm;
-	private Timestamp updateDt;
+	private String updateDt;
 }

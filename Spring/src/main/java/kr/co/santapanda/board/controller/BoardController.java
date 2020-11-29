@@ -17,7 +17,7 @@ import kr.co.santapanda.board.service.BoardService;
 import kr.co.santapanda.board.vo.BoardVO;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("/api/board")
 public class BoardController {
 	
 	@Autowired
