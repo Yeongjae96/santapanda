@@ -67,12 +67,14 @@ export default {
     },
     deleteClick() {
       const input = window.confirm(`${this.board.boardNo}번 ${this.board.title} 게시물을 삭제하시겠습니까?`);
+      console.log(this.board);
       if (input) {
-        this.$http.url = `/board/${this.$route.params.seq}`;
+        this.$http.url = `/board`;
         this.$http.method = 'delete';
+        this.$http.param = this.board
         this.$http.request(() => {
           window.alert('삭제를 성공하였습니다.');
-          this.$route.push('/');
+          this.$router.push('/');
         }, error => window.alert(error));
       }
     }

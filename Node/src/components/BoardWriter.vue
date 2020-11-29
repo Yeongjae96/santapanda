@@ -42,6 +42,7 @@ export default {
         password: '',
         createDt: '',
         createUserId: 'yeongjae',
+        updateUserId: '',
       },
       type: '등록'
     };
@@ -74,6 +75,7 @@ export default {
       if (this.$route.params.seq) {
         this.$http.url = '/board'
         this.$http.method = 'put'
+        this.board.updateUserId = 'yeongjae'
       } else {
         this.$http.url = '/board';
         this.$http.method = 'post';

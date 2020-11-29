@@ -18,7 +18,6 @@ http.request = function(resolveFuc, rejectFuc) {
   let query = '';
 
   const method = http.method.toLowerCase();
-
   if (method === 'get') {
     query = queryString.stringify(http.param);
     param = {
@@ -27,8 +26,12 @@ http.request = function(resolveFuc, rejectFuc) {
         return query;
       },
     };
+  } else if (method === 'delete') {
+    param = {
+      data: http.param
+    } 
   } else {
-    param = http.param;
+    param = http.param
   }
   const tempUrl = http.url.charAt(0) === '/' ? http.url : '/' + http.url
   const url = `${process.env.VUE_APP_BASE_API}${tempUrl}`;

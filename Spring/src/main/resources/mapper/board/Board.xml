@@ -68,13 +68,11 @@
 	
 	<update id="updateBoard" parameterType="kr.co.santapanda.board.vo.BoardVO">
 		UPDATE com_board
-		 SET ( title = #{title}
-			   password = #{password}
-			   content = #{content}
-			   create_user_id = #{createUserId}
-			   create_dt = #{createDt}
-			   update_user_id = #{updateUserId}
-			   update_dt = sysdate)
+		   SET title = #{title}
+			   , password = #{password, jdbcType=VARCHAR}
+			   , content = #{content}
+			   , update_user_id = #{updateUserId}
+			   , update_dt = sysdate
 	    WHERE  board_no = #{boardNo}
 	</update>
 
