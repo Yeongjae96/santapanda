@@ -249,3 +249,5 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse,node,windows,vuejs,vue
 Node/package-lock.json
+
+Spring/target/
