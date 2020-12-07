@@ -2,9 +2,6 @@ package kr.co.santapanda.common.exception;
 
 public class UnauthorizedException extends RuntimeException {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8229784113821847763L;
 	
 	public UnauthorizedException() {

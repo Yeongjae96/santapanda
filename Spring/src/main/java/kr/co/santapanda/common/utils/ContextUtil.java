@@ -1,12 +1,13 @@
 package kr.co.santapanda.common.utils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import io.jsonwebtoken.lang.Collections;
 
@@ -61,5 +62,10 @@ public class ContextUtil {
 	public static List<String> getParameters(String key) {
 		return Collections.arrayToList(getRequest().getParameterValues(key));
 	}
+	
+	public static HttpServletResponse getResponse() {
+		return ((ServletWebRequest)RequestContextHolder.getRequestAttributes()).getResponse();
+	}
+	
 	
 }

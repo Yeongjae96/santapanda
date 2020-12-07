@@ -1,9 +1,11 @@
 package kr.co.santapanda.config.security.jwt.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Claims;
@@ -25,7 +27,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class JwtServiceImpl implements JwtService {
 
-	private static final String SANTA_PANDA =  "SantaPanda";
+	@Value("${jwt.salt}")
+	private String SANTA_PANDA;
+	
+	@Value("${jwt.expmin}")
+	private Long expireMin;
 	
 	/**
 	 * JWT 토큰 생성
@@ -33,9 +39,9 @@ public class JwtServiceImpl implements JwtService {
 	@Override
 	public <T> String create(String key, T data, String subject) {
 		String jwt = Jwts.builder()
-						 .setHeaderParam("typ", "JWT")
-						 .setHeaderParam("regDate", System.currentTimeMillis())
+						 .setHeaderParam("typ", "JWT") // 토큰의 타입으로 고정값
 						 .setSubject(subject)
+						 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * expireMin))
 						 .claim(key, data)
 						 .signWith(SignatureAlgorithm.HS256, this.generateKey())
 						 .compact();
@@ -71,9 +77,7 @@ public class JwtServiceImpl implements JwtService {
 		} catch (Exception e) {
 			throw new UnauthorizedException();
 		}
-		@SuppressWarnings("unchecked")
-		Map<String, Object> value = (LinkedHashMap<String, Object>)claims.getBody().get(key);
-		return value;
+		return claims.getBody();
 	}
 	
 	/**

@@ -9,7 +9,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserVO {
 	
-	private String userNo;
 	private String userId;
 	private String password;
 	private String name;
