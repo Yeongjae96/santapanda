@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 
 import kr.co.santapanda.board.mapper.BoardMapper;
 import kr.co.santapanda.board.vo.BoardVO;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class BoardService {
 	
-	@Autowired
-	private BoardMapper boardMapper;
+	private final BoardMapper boardMapper;
 	
 	public BoardVO getBoard(String boardNo) {
 		return boardMapper.getBoard(boardNo);

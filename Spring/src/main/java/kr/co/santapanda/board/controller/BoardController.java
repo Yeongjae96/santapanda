@@ -2,7 +2,6 @@ package kr.co.santapanda.board.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.santapanda.board.service.BoardService;
 import kr.co.santapanda.board.vo.BoardVO;
+import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequestMapping("/api/board")
+@RequiredArgsConstructor
 public class BoardController {
 	
-	@Autowired
-	private BoardService boardService;
-	
+	private final BoardService boardService;
 	
 	@GetMapping
 	public ResponseEntity<List<BoardVO>> getBoardList(BoardVO board) {
