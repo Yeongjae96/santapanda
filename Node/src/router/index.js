@@ -13,16 +13,26 @@ export default new Router({
   routes: [
     {
       path: '/',
+      name: 'app-main',
+      component: () => import('@/components/appMain')
+    },
+    {
+      path: '/user/sign-up',
+      name: 'signUp',
+      component: () => import('@/components/login/signUp')
+    },
+    {
+      path: '/board',
       name: 'BoardList',
       component: BoardList
     },
     {
-      path: '/view/:seq',
+      path: '/board/:seq',
       name: 'BoardView',
       component: BoardView
     },
     {
-      path: '/writer',
+      path: '/board/write',
       name: 'BoardWriter',
       component: BoardWriter
     }

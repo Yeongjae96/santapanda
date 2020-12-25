@@ -1,47 +1,55 @@
-import axios from 'axios'
-import queryString from 'qs'
-// import store from '@/store'
+import axios from 'axios';
+import store from '@/store';
+import router from '@/router';
 
-const http = {
-  url: '',
-  method: '',
-  param: '',
-  query: '',
-  dataType: 'json',
-  request: null,
-}
+import common from '../js/common';
 
-http.request = function(resolveFuc, rejectFuc) {
+import {
+  getAccessToken,
+  getNewToken,
+  setAccessToken,
+  setRefreshToken,
+  getAccessExpiredCode,
+  getRefreshExpiredCode,
+  getWrongPasswordCode,
+  getConcurrentExpiredCode,
+  getRefreshToken,
+  getToken
+} from './auth';
 
-  if (!http.url) return;
-  let param = {};
-  let query = '';
 
-  const method = http.method.toLowerCase();
-  if (method === 'get') {
-    query = queryString.stringify(http.param);
-    param = {
-      params: http.param,
-      paramsSerializer: () => {
-        return query;
-      },
-    };
-  } else if (method === 'delete') {
-    param = {
-      data: http.param
-    } 
-  } else {
-    param = http.param
+const service = axios.create({
+  baseURL: process.env.VUE_APP_BASE_API,
+  timeout: 5000,
+  withCredentials: true,
+  // 다른 Origin으로부터 쿠키 전달
+})
+
+service.interceptors.request.use(
+  config => {
+    if (store.getters.token) {
+      config.headers['x-token'] = getToken();
+      config.headers['X-Authorization'] = `${getAccessToken()}`;
+    }
+    return config;
+  },
+  error => {
+    Promise.reject(error);
   }
-  const tempUrl = http.url.charAt(0) === '/' ? http.url : '/' + http.url
-  const url = `${process.env.VUE_APP_BASE_API}${tempUrl}`;
-  axios[method](url, param) 
-    .then(_result => {
-      if (typeof resolveFuc === 'function') {
-        resolveFuc(_result);
-      }
-    })
-    .catch(rejectFuc);
-}
+);
 
-export default http;
+service.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+  function (error) {
+    const status = error.response ? error.response.status : null;
+    const returnCode = error.response ? error.response.data.returnCode : null;
+    
+    if (status === 401) {
+      if (returnCode === getAccessExpiredCode())
+    }
+  }
+
+
+)

@@ -13,7 +13,7 @@
 	       AND password = #{encryptPassword}
 	</select>
 	
-	<insert id="createUser">
+	<insert id="createUser" parameterType="kr.co.santapanda.user.model.UserVO">
 		INSERT INTO com_user
 				  ( user_id
 				  , password

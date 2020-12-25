@@ -25,7 +25,7 @@ public class UserService {
 	private final JwtService jwtService;
 	
 	public String createUser(UserVO vo) throws Exception {
-		vo.setPassword(EncryptUtil.SHA256(vo.getPassword()));
+//		vo.setPassword(EncryptUtil.SHA256(vo.getPassword()));
 		userMapper.createUser(vo);
 		return vo.getUserId();
 	}

@@ -10,7 +10,7 @@ public class MenuVO {
 	private String upperMenuCode;
 	private int sortOrder;
 	private String useYn;
-	private String createUserId;
+	private String Id;
 	private String createDt;
 	private String updateUserId;
 	private String updateDt;
