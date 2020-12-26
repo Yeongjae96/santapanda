@@ -12,7 +12,7 @@ export default new Router({
   // routes: menu,
   routes: [
     {
-      path: '/',
+      path: '',
       name: 'app-main',
       component: () => import('@/components/appMain')
     },
